@@ -80,7 +80,7 @@ class _DateAppState extends State<DateApp> {
                     Shadow(
                       blurRadius: 10.0,
                       color: Colors.black,
-                      offset: Offset(5.0, 5.0),
+                      offset: Offset(6.0, 5.0),
                     ),
                   ],
                 ),
