@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,94 +29,22 @@ class DateApp extends StatefulWidget {
 }
 
 class _DateAppState extends State<DateApp> {
-  // Time
-  String hour = "";
-  String minute = "";
-  String second = "";
-  // Date
-  String year = "";
-  String month = "";
-  String day = "";
-  String dayWeek = "";
-  
+  String weekday = DateFormat.EEEE().format(DateTime.now());
+  String date = DateFormat.yMMMd().format(DateTime.now());
+  String timeNow = DateFormat('hh:mm:ss a').format(DateTime.now());
+
   changeEverySec() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        year = DateTime.now().year.toString();
-        month = DateTime.now().month.toString();
-        switch (month) {
-          case "1":
-            month = "Jan";
-            break;
-          case "2":
-            month = "Feb";
-            break;
-          case "3":
-            month = "Mar";
-            break;
-          case "4":
-            month = "Apr";
-            break;
-          case "5":
-            month = "May";
-            break;
-          case "6":
-            month = "Jun";
-            break;
-          case "7":
-            month = "Jul";
-            break;
-          case "8":
-            month = "Aug";
-            break;
-          case "9":
-            month = "Sep";
-            break;
-          case "10":
-            month = "Oct";
-            break;
-          case "11":
-            month = "Nov";
-            break;
-          case "12":
-            month = "Dec";
-            break;
-        }
-        day = DateTime.now().day.toString();
-        dayWeek = DateTime.now().weekday.toString();
-        switch (dayWeek) {
-          case "1":
-            dayWeek = "Monday";
-            break;
-          case "2":
-            dayWeek = "Tuesday";
-            break;
-          case "3":
-            dayWeek = "Wednesday";
-            break;
-          case "4":
-            dayWeek = "Thursday";
-            break;
-          case "5":
-            dayWeek = "Friday";
-            break;
-          case "6":
-            dayWeek = "Saturday";
-            break;
-          case "7":
-            dayWeek = "Sunday";
-            break;
-        }
-        hour = DateTime.now().hour.toString();
-        minute = DateTime.now().minute.toString();
-        second = DateTime.now().second.toString();
+        weekday = DateFormat.EEEE().format(DateTime.now());
+        date = DateFormat.yMMMd().format(DateTime.now());
+        timeNow = DateFormat('hh:mm:ss a').format(DateTime.now());
       });
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     changeEverySec();
   }
@@ -130,7 +58,11 @@ class _DateAppState extends State<DateApp> {
           backgroundColor: Colors.black87,
           title: Text(
             "Time & Date App",
-            style: TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 27,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           centerTitle: true,
         ),
@@ -139,7 +71,7 @@ class _DateAppState extends State<DateApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Today's Date is $dayWeek",
+                "Today's Date is $weekday",
                 style: TextStyle(
                   fontSize: 32,
                   color: Colors.amberAccent,
@@ -157,7 +89,7 @@ class _DateAppState extends State<DateApp> {
                 height: 22,
               ),
               Text(
-                "$month $day, $year",
+                date,
                 style: TextStyle(
                   fontSize: 32,
                   color: Colors.amberAccent,
@@ -175,7 +107,7 @@ class _DateAppState extends State<DateApp> {
                 height: 22,
               ),
               Text(
-                "${hour.padLeft(2, "0")}:${minute.padLeft(2, "0")}:${second.padLeft(2, "0")}",
+                timeNow,
                 style: TextStyle(
                   fontSize: 42,
                   color: Colors.amberAccent,
